@@ -1,23 +1,933 @@
-<!DOCTYPE html> <!-- Indica que este documento es HTML5 -->
-<html> <!-- Inicio del documento HTML -->
- <head> <!Cabecera: aquí va la configuración de la página -->
- <meta charset="UTF-8"> <!-- Permite usar caracteres especiales como tildes y ñ -->
- <title>Mi Blog</title> <!-- Título que aparece en la pestaña del navegador -
-->
- </head>
- <body> <!Cuerpo: todo lo que el usuario verá en la página -->
- <h1>Mi blog de fotos :3 </h1> <!-- Encabezado principal -->
- <p>Hola, me llamo Cristopher y soy un estudiante de ingenieria civil en informatica 
-de la universidad mayor</p> <!-- Un párrafo de texto -->
-<ul> <p>Lista de hobbies</p>
-<li> Jugar videojuegos
-<li> Ver anime
-<li> jugar basquest
-<a href="https://www.leagueoflegends.com/es-mx/">Haga clic aquí</a>
-</li>
-</li>
-</li>
-</ul>
-<img src="https://i.pinimg.com/1200x/02/e8/40/02e84074debe2e39892330f98f7c552b.jpg">
- </body>
-</html> <!-- Fin del documento HTML -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RRA Chile | Cocina Innovadora</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .ar-container {
+      width: 100%;
+      height: 400px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+    .carousel-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      object-fit: cover;
+    }
+    .carousel-img.active {
+      opacity: 1;
+    }
+    .section-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease-out;
+    }
+    .section-content.active {
+      max-height: 2000px;
+    }
+    .kit-detail {
+      display: none;
+    }
+    .kit-detail.active {
+      display: block;
+    }
+  </style>
+  <script src="https://accounts.google.com/gsi/client" async defer></script> 
+</head>
+<body class="bg-gray-50 font-sans flex flex-col min-h-screen">
+  <header class="bg-red-600 text-white shadow-lg sticky top-0 z-40">
+    <div class="container mx-auto px-4 py-6">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+          <i class="fas fa-utensils text-3xl"></i>
+          <h1 class="text-2xl font-bold">RRA Chile</h1>
+        </div>
+        <nav class="hidden md:flex space-x-6">
+          <a href="#" data-section="inicio" class="hover:text-red-200 font-medium">Inicio</a>
+          <a href="#" data-section="recetas" class="hover:text-red-200 font-medium">Recetas</a>
+          <a href="#" data-section="kits" class="hover:text-red-200 font-medium">Kits</a>
+          <a href="#" data-section="premium" class="hover:text-red-200 font-medium">Premium</a>
+        </nav>
+        <div class="flex items-center space-x-4">
+          <a href="#" id="login-nav-btn" data-section="login" class="bg-white text-red-600 px-4 py-2 rounded-full font-medium hover:bg-red-50 transition">Iniciar sesión</a>
+          <button id="cart-btn" class="relative text-white hover:text-red-200 transition">
+            <i class="fas fa-shopping-cart text-2xl"></i>
+            <span id="cart-badge" class="absolute -top-2 -right-2 bg-blue-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+          </button>
+          <button class="md:hidden"><i class="fas fa-bars text-2xl"></i></button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    <section id="inicio" class="bg-gradient-to-r from-red-600 to-orange-500 text-white py-16 section">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center">
+          <div class="md:w-1/2 mb-8 md:mb-0">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Cocina con Realidad Aumentada</h2>
+            <p class="text-xl mb-6">Aprende recetas paso a paso con instrucciones interactivas en AR y consigue todos los ingredientes con nuestros kits listos.</p>
+            <div class="flex space-x-4">
+              <button id="realidad-virtual-btn" class="bg-white text-red-600 px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition">Realidad virtual</button>
+              <button id="conocenos-btn" class="border-2 border-white px-6 py-3 rounded-full font-bold hover:bg-white hover:text-red-600 transition">Conócenos</button>
+            </div>
+          </div>
+          <div class="md:w-1/2 relative">
+            <div class="ar-container bg-black relative">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/f/f4/Bistec_a_lo_pobre_%2811246262064%29.jpg" alt="Bistec a lo pobre" class="carousel-img active">
+              <img src="https://lacampagnola.com/uploads/recipes/5de952b2747f7.png" alt="Empanadas chilenas" class="carousel-img">
+              <img src="https://storage.googleapis.com/chile-travel-cdn/2021/08/completo-italiano.jpg" alt="Completo italiano" class="carousel-img">
+            </div>
+            <p class="text-center mt-2 text-sm opacity-80">Platos típicos de Chile en Realidad Aumentada</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="realidad-virtual" class="py-16 bg-gray-100 section-content">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Experiencia de Cocina Autónoma con Realidad Virtual</h2>
+        <div class="flex flex-col md:flex-row items-center gap-8">
+          <div class="md:w-1/2">
+            <img src="https://placehold.co/600x400/ef4444/white?text=Realidad+Virtual+en+Cocina" alt="Realidad Virtual en Cocina" class="rounded-lg shadow-lg w-full">
+          </div>
+          <div class="md:w-1/2">
+            <p class="text-lg text-gray-700 mb-4">Nuestra tecnología de realidad virtual revoluciona la forma de cocinar. Con nuestras gafes VR especializadas, podrás seguir recetas paso a paso con instrucciones holográficas que se superponen a tus ingredientes reales.</p>
+            <p class="text-lg text-gray-700 mb-4">La experiencia incluye:</p>
+            <ul class="list-disc list-inside text-lg text-gray-700 mb-6">
+              <li>Guías visuales interactivas para cada paso de la receta</li><li>Temporizadores integrados que aparecen en tu campo de visión</li><li>Asistentes virtuales que te orientan durante el proceso</li><li>Mediciones precisas superpuestas sobre tus ingredientes</li>
+            </ul>
+            <p class="text-lg text-gray-700">Esta tecnología está directamente integrada con nuestra venta de recetas, permitiéndote acceder a contenido exclusivo y actualizaciones constantes de nuestro catálogo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="conocenos" class="py-16 bg-white section-content">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Conócenos</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+          <div>
+            <h3 class="text-2xl font-bold mb-6 text-red-600">Nuestra Misión</h3>
+            <p class="text-lg text-gray-700 mb-4">En RRA Chile, nuestra misión es revolucionar la experiencia culinaria mediante la integración de tecnología innovadora con la tradición gastronómica chilena.</p>
+            <p class="text-lg text-gray-700">Buscamos hacer la cocina más accesible, divertida y educativa para todos, desde principiantes hasta chefs experimentados, utilizando realidad aumentada y virtual para guiar a nuestros usuarios en cada paso del proceso culinario.</p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-6 text-red-600">Nuestra Historia</h3>
+            <p class="text-lg text-gray-700 mb-4">RRA Chile nació en 2020 cuando un grupo de amigos apasionados por la tecnología y la gastronomía se dio cuenta del potencial de combinar estas dos áreas. Comenzamos como un pequeño emprendimiento con solo 5 recetas básicas.</p>
+            <p class="text-lg text-gray-700">Hoy, después de 5 años de crecimiento constante, contamos con más de 200 recetas en nuestro catálogo, hemos incorporado tecnología de realidad virtual y aumentada, y hemos entregado miles de kits culinarios a lo largo de todo Chile.</p>
+          </div>
+        </div>
+        <div class="bg-gray-100 p-8 rounded-lg">
+          <h3 class="text-2xl font-bold mb-6 text-center text-red-600">Información de Contacto</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center">
+              <i class="fas fa-phone text-3xl text-red-600 mb-4"></i>
+              <h4 class="font-bold mb-2">Teléfono</h4>
+              <p class="text-gray-700">+56 2 2345 6789</p>
+            </div>
+            <div class="text-center">
+              <i class="fas fa-envelope text-3xl text-red-600 mb-4"></i>
+              <h4 class="font-bold mb-2">Email</h4>
+              <p class="text-gray-700">contacto@rrachile.cl</p>
+            </div>
+            <div class="text-center">
+              <i class="fas fa-map-marker-alt text-3xl text-red-600 mb-4"></i>
+              <h4 class="font-bold mb-2">Dirección</h4>
+              <p class="text-gray-700">Av. Providencia 1234, Santiago</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="recetas" class="py-16 bg-white section hidden">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Recetas de Chile</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="recipe-card group bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer transition-shadow duration-300 hover:shadow-2xl" data-id="bistec-a-lo-pobre" data-name="Bistec a lo Pobre" data-price-value="7990" data-img-src="https://upload.wikimedia.org/wikipedia/commons/f/f4/Bistec_a_lo_pobre_%2811246262064%29.jpg">
+            <div class="overflow-hidden rounded-t-xl">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/f/f4/Bistec_a_lo_pobre_%2811246262064%29.jpg" alt="Bistec a lo pobre" class="w-full h-56 object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110">
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2 text-gray-900">Bistec a lo pobre</h3>
+              <p class="text-gray-600">Carne jugosa con cebolla caramelizada, huevo frito y papas fritas.</p>
+            </div>
+          </div>
+          <div class="recipe-card group bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer transition-shadow duration-300 hover:shadow-2xl" data-id="empanadas-chilenas" data-name="Empanadas Chilenas" data-price-value="5500" data-img-src="https://d2kkzshb6n9g86.cloudfront.net/wp-content/uploads/2023/11/recetas-chilenas-empanadas-chilenas-1.jpg.webp">
+            <div class="overflow-hidden rounded-t-xl">
+              <img src="https://d2kkzshb6n9g86.cloudfront.net/wp-content/uploads/2023/11/recetas-chilenas-empanadas-chilenas-1.jpg.webp" alt="Empanadas" class="w-full h-56 object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110">
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2 text-gray-900">Empanadas Chilenas</h3>
+              <p class="text-gray-600">Empanadas de pino rellenas de carne, huevo duro y aceitunas.</p>
+            </div>
+          </div>
+          <div class="recipe-card group bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer transition-shadow duration-300 hover:shadow-2xl" data-id="completo-italiano" data-name="Completo Italiano" data-price-value="3500" data-img-src="https://storage.googleapis.com/chile-travel-cdn/2021/08/completo-italiano.jpg">
+            <div class="overflow-hidden rounded-t-xl">
+              <img src="https://storage.googleapis.com/chile-travel-cdn/2021/08/completo-italiano.jpg" alt="Completo italiano" class="w-full h-56 object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110">
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2 text-gray-900">Completo italiano</h3>
+              <p class="text-gray-600">La trilogía de palta, mayonesa y tomate que le da su nombre y sabor.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kits" class="py-16 bg-gray-100 section hidden">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold mb-6 text-gray-800">Nuestros Kits</h2>
+        <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">Compra kits listos con todos los ingredientes frescos y medidos para tus recetas favoritas.</p>
+        <button id="toggle-kits-btn" class="bg-green-600 text-white px-8 py-3 rounded-full font-bold hover:bg-green-700 transition-transform transform hover:scale-105">Ver Kits Disponibles</button>
+        <div id="kits-list" class="hidden mt-12">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+            <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:shadow-xl hover:-translate-y-2">
+              <img src="https://i.imgur.com/j5j6U8p.png" alt="Kit de Repostería" class="w-full h-48 object-cover">
+              <div class="p-6">
+                <h3 class="text-2xl font-bold mb-2 text-gray-900">Kit de Repostería</h3>
+                <p class="text-gray-700 mb-4">Todo lo que necesitas para crear postres increíbles en casa.</p>
+                <button class="kit-detail-btn w-full bg-red-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-600 transition" data-kit="reposteria">Ver más</button>
+              </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:shadow-xl hover:-translate-y-2">
+              <img src="https://i.imgur.com/10jhZ69.png" alt="Kit de Cocina" class="w-full h-48 object-cover">
+              <div class="p-6">
+                <h3 class="text-2xl font-bold mb-2 text-gray-900">Kit de Cocina</h3>
+                <p class="text-gray-700 mb-4">Ingredientes frescos y recetas fáciles para tus comidas diarias.</p>
+                <button class="kit-detail-btn w-full bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 transition" data-kit="cocina">Ver más</button>
+              </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:shadow-xl hover:-translate-y-2">
+              <img src="https://i.imgur.com/cap4qWd.png" alt="Kit de Asados" class="w-full h-48 object-cover">
+              <div class="p-6">
+                <h3 class="text-2xl font-bold mb-2 text-gray-900">Kit de Asados</h3>
+                <p class="text-gray-700 mb-4">Conviértete en el rey de la parrilla con nuestros cortes y adobos.</p>
+                <button class="kit-detail-btn w-full bg-amber-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-amber-600 transition" data-kit="asados">Ver más</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kit-reposteria" class="kit-detail py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <button class="back-to-kits mb-6 text-red-600 font-bold flex items-center"><i class="fas fa-arrow-left mr-2"></i> Volver a Kits</button>
+        <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">Kit de Repostería</h2>
+        <div class="flex flex-col md:flex-row gap-8 items-center">
+          <div class="md:w-1/2">
+            <img src="https://i.imgur.com/j5j6U8p.png" alt="Utensilios de Repostería" class="rounded-lg shadow-lg w-full">
+          </div>
+          <div class="md:w-1/2">
+            <p class="text-lg text-gray-700 mb-6">Nuestro Kit de Repostería incluye todo lo necesario para crear deliciosos postres y pasteles. Ideal para principiantes y expertos reposteros.</p>
+            <h3 class="text-xl font-bold mb-4 text-red-600">Contenido del kit:</h3>
+            <ul class="list-disc list-inside text-lg text-gray-700 mb-6">
+              <li>Batidora de mano eléctrica</li><li>Juego de bowls de acero inoxidable (3 tamaños)</li><li>Varillas batidoras</li><li>Espátulas de silicona (2 unidades)</li><li>Rodillo de madera</li><li>Cortadores de galletas (6 formas diferentes)</li><li>Manga pastelera con boquillas intercambiables</li><li>Medidores de precisión (cucharas và tazas)</li><li>Termómetro para chocolate y azúcar</li>
+            </ul>
+            <div class="flex items-center justify-between">
+              <p class="text-2xl font-bold text-red-600">Precio: $49.990</p>
+              <button class="bg-red-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-red-700 transition">Agregar al Carrito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kit-cocina" class="kit-detail py-16 bg-gray-100">
+      <div class="container mx-auto px-4">
+        <button class="back-to-kits mb-6 text-green-600 font-bold flex items-center"><i class="fas fa-arrow-left mr-2"></i> Volver a Kits</button>
+        <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">Kit de Cocina</h2>
+        <div class="flex flex-col md:flex-row gap-8 items-center">
+          <div class="md:w-1/2">
+            <img src="https://i.imgur.com/10jhZ69.png" alt="Utensilios de Cocina" class="rounded-lg shadow-lg w-full">
+          </div>
+          <div class="md:w-1/2">
+            <p class="text-lg text-gray-700 mb-6">El Kit de Cocina esencial para preparar todo tipo de platos. Incluye herramientas profesionales de calidad premium.</p>
+            <h3 class="text-xl font-bold mb-4 text-green-600">Contenido del kit:</h3>
+            <ul class="list-disc list-inside text-lg text-gray-700 mb-6">
+              <li>Juego de cuchillos de chef (3 piezas)</li><li>Tabla de cortar de bambú</li><li>Pelador de vegetales</li><li>Rallador de 4 caras</li><li>Juego de cucharas medidoras</li><li>Tazas medidoras</li><li>Colador de malla fina</li><li>Espátulas y cucharas de madera</li><li>Pinzas de cocina</li><li>Pelador de ajos</li><li>Abridor de latas</li>
+            </ul>
+            <div class="flex items-center justify-between">
+              <p class="text-2xl font-bold text-green-600">Precio: $39.990</p>
+              <button class="bg-green-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-green-700 transition">Agregar al Carrito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kit-asados" class="kit-detail py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <button class="back-to-kits mb-6 text-amber-600 font-bold flex items-center"><i class="fas fa-arrow-left mr-2"></i> Volver a Kits</button>
+        <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">Kit de Asados</h2>
+        <div class="flex flex-col md:flex-row gap-8 items-center">
+          <div class="md:w-1/2">
+            <img src="https://i.imgur.com/cap4qWd.png" alt="Utensilios de Asados" class="rounded-lg shadow-lg w-full">
+          </div>
+          <div class="md:w-1/2">
+            <p class="text-lg text-gray-700 mb-6">Conviértete en el maestro de la parrilla con nuestro Kit de Asados. Incluye todo lo necesario para lograr cortes perfectos.</p>
+            <h3 class="text-xl font-bold mb-4 text-amber-600">Contenido del kit:</h3>
+            <ul class="list-disc list-inside text-lg text-gray-700 mb-6">
+              <li>Pinzas para parrilla largas (45 cm)</li><li>Termómetro para carne digital</li><li>Cepillo para adobar de silicona</li><li>Juego de cuchillos para carnes (3 piezas)</li><li>Tenedor para carne</li><li>Guantes térmicos resistentes al calor</li><li>Espátula ancha para parrilla</li><li>Set de marinadas y especias (6 variedades)</li><li>Inyector de marinadas</li><li>Bandeja para descongelar carnes</li>
+            </ul>
+            <div class="flex items-center justify-between">
+              <p class="text-2xl font-bold text-amber-600">Precio: $59.990</p>
+              <button class="bg-amber-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-amber-700 transition">Agregar al Carrito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="premium" class="py-16 bg-white section hidden">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold mb-6 text-gray-800">Beneficios Premium</h2>
+        <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">Accede a recetas exclusivas, clases con chefs en vivo y descuentos especiales en todos nuestros kits.</p>
+        <button id="toggle-premium-btn" class="bg-purple-600 text-white px-8 py-3 rounded-full font-bold hover:bg-purple-700 transition-transform transform hover:scale-105">Hazte Premium</button>
+        <div id="premium-plans" class="hidden mt-12">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div class="border-2 border-gray-300 rounded-lg p-6 text-center transform transition duration-300 hover:shadow-lg hover:border-gray-400 hover:-translate-y-2">
+              <h3 class="text-2xl font-bold text-gray-500 mb-4">Silver</h3>
+              <p class="text-gray-600 mb-4">Recetarios básicos y descuentos menores.</p>
+              <p class="font-bold text-lg mb-4">5% de descuento</p>
+              <button class="w-full bg-gray-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-600 transition">Elegir Plan</button>
+            </div>
+            <div class="border-2 border-yellow-400 rounded-lg p-6 text-center transform transition duration-300 hover:shadow-xl hover:border-yellow-500 hover:-translate-y-2">
+              <h3 class="text-2xl font-bold text-yellow-500 mb-4">Gold</h3>
+              <p class="text-gray-600 mb-4">Recetarios premium y acceso anticipado a novedades.</p>
+              <p class="font-bold text-lg mb-4">10% de descuento y regalos</p>
+              <button class="w-full bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-600 transition">Elegir Plan</button>
+            </div>
+            <div class="border-2 border-purple-500 rounded-lg p-6 text-center transform transition duration-300 hover:shadow-2xl hover:border-purple-600 hover:-translate-y-2">
+              <h3 class="text-2xl font-bold text-purple-600 mb-4">Platinum</h3>
+              <p class="text-gray-600 mb-4">Clases en vivo, soporte prioritario y regalos frecuentes.</p>
+              <p class="font-bold text-lg mb-4">20% de descuento y acceso total</p>
+              <button class="w-full bg-purple-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-purple-700 transition">Elegir Plan</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="login" class="py-16 bg-white section hidden">
+        <div class="container mx-auto px-4 max-w-lg">
+            <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">Inicia Sesión en RRA Chile</h2>
+            <div class="bg-gray-50 p-8 rounded-xl shadow-lg border border-gray-200">
+                <p class="text-center text-lg text-gray-600 mb-6">Accede a tus recetas con tu cuenta de Google</p>
+                
+                <div class="flex justify-center mb-8">
+                    <div id="g_id_onload"
+                        data-client_id="TU_CLIENT_ID_DE_GOOGLE.apps.googleusercontent.com" 
+                        data-context="signin"
+                        data-ux_mode="popup"
+                        data-callback="handleCredentialResponse"
+                        data-auto_select="true"
+                        data-nonce="">
+                    </div>
+                    <div class="g_id_signin"
+                        data-type="standard"
+                        data-shape="pill"
+                        data-theme="outline"
+                        data-text="signin_with"
+                        data-size="large"
+                        data-logo_alignment="left">
+                    </div>
+                </div>
+
+                <div class="text-center text-sm text-gray-500">
+                    <p>Al iniciar sesión, aceptas nuestros <a href="#" class="text-red-600 hover:underline">Términos y Condiciones</a>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NUEVA SECCIÓN: FINALIZAR COMPRA -->
+    <section id="finalizar-compra" class="py-16 bg-gray-50 section hidden">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">Finalizar Compra</h2>
+        
+        <!-- Métodos de Pago -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+          <h3 class="text-2xl font-bold mb-6 text-gray-800">Método de Pago</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <button class="payment-method-btn flex flex-col items-center justify-center p-6 border-2 border-gray-200 rounded-xl hover:border-green-500 hover:bg-green-50 transition-all duration-300" data-method="efectivo">
+              <div class="text-4xl mb-4">💵</div>
+              <h4 class="text-xl font-bold text-gray-800">Pagar con Efectivo</h4>
+              <p class="text-gray-600 mt-2">Paga al recibir tu pedido</p>
+            </button>
+            <button class="payment-method-btn flex flex-col items-center justify-center p-6 border-2 border-gray-200 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-all duration-300" data-method="tarjeta">
+              <div class="text-4xl mb-4">💳</div>
+              <h4 class="text-xl font-bold text-gray-800">Pagar con Tarjeta</h4>
+              <p class="text-gray-600 mt-2">Pago seguro en línea</p>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Módulo de Seguimiento al Estilo Uber -->
+        <div class="bg-white rounded-xl shadow-lg p-6">
+          <h3 class="text-2xl font-bold mb-6 text-gray-800">Seguimiento de tu Pedido</h3>
+          
+          <!-- Información de Entrega -->
+          <div class="bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl p-6 mb-8">
+            <div class="flex justify-between items-center">
+              <div>
+                <h4 class="text-xl font-bold mb-2">Llegada estimada</h4>
+                <p class="text-3xl font-bold">15-25 min</p>
+              </div>
+              <div class="text-5xl">🚗</div>
+            </div>
+          </div>
+          
+          <!-- Mapa Simulado -->
+          <div class="relative mb-8">
+            <div class="bg-gray-200 rounded-xl h-64 flex items-center justify-center">
+              <div class="text-center">
+                <div class="text-5xl mb-4">🗺️</div>
+                <p class="text-gray-600">Mapa de seguimiento en tiempo real</p>
+              </div>
+            </div>
+            <!-- Marcadores en el mapa -->
+            <div class="absolute top-4 left-4 bg-red-500 text-white p-2 rounded-lg shadow-lg">
+              <i class="fas fa-utensils mr-1"></i> RRA Chile
+            </div>
+            <div class="absolute bottom-4 right-4 bg-blue-500 text-white p-2 rounded-lg shadow-lg">
+              <i class="fas fa-home mr-1"></i> Tu ubicación
+            </div>
+            <!-- Punto de seguimiento móvil -->
+            <div class="absolute top-1/2 left-1/3 bg-green-500 text-white p-2 rounded-full shadow-lg animate-pulse">
+              <i class="fas fa-motorcycle"></i>
+            </div>
+          </div>
+          
+          <!-- Progreso del Pedido -->
+          <div class="mb-8">
+            <h4 class="text-xl font-bold mb-4 text-gray-800">Estado de tu pedido</h4>
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center">
+                <div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white mr-3">
+                  <i class="fas fa-check"></i>
+                </div>
+                <span class="font-medium">Pedido confirmado</span>
+              </div>
+              <span class="text-sm text-gray-500">Hace 2 min</span>
+            </div>
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center">
+                <div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white mr-3">
+                  <i class="fas fa-utensils"></i>
+                </div>
+                <span class="font-medium">En preparación</span>
+              </div>
+              <span class="text-sm text-gray-500">Hace 5 min</span>
+            </div>
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center">
+                <div class="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center text-white mr-3">
+                  <i class="fas fa-motorcycle"></i>
+                </div>
+                <span class="font-medium">Repartidor en camino</span>
+              </div>
+              <span class="text-sm text-gray-500">En progreso</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-gray-500 mr-3">
+                  <i class="fas fa-home"></i>
+                </div>
+                <span class="font-medium text-gray-400">Entregado</span>
+              </div>
+              <span class="text-sm text-gray-400">Próximamente</span>
+            </div>
+          </div>
+          
+          <!-- Información del Repartidor -->
+          <div class="bg-gray-50 rounded-xl p-4 flex items-center">
+            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white text-xl font-bold mr-4">
+              JL
+            </div>
+            <div>
+              <h5 class="font-bold text-gray-800">José López</h5>
+              <p class="text-gray-600 text-sm">Tu repartidor</p>
+            </div>
+            <div class="ml-auto">
+              <button class="bg-white border border-gray-300 text-gray-800 px-4 py-2 rounded-lg font-medium hover:bg-gray-50 transition">
+                <i class="fas fa-phone-alt mr-2"></i>Llamar
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Botón para volver al inicio -->
+        <div class="text-center mt-8">
+          <button id="back-to-home-btn" class="bg-red-600 text-white px-8 py-3 rounded-full font-bold hover:bg-red-700 transition">
+            <i class="fas fa-home mr-2"></i>Volver al Inicio
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="container mx-auto px-4 text-center">
+      <h3 class="text-xl font-bold mb-4 flex items-center justify-center"><i class="fas fa-utensils mr-2"></i> RRA Chile</h3>
+      <p class="text-gray-400">Revolucionando la forma de cocinar con tecnología AR y kits de ingredientes premium.</p>
+      <p class="text-gray-500 mt-4">© 2025 RRA Chile. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out">
+      <div id="modal-content" class="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-auto transform scale-95 transition-transform duration-300 ease-in-out">
+          <button id="modal-close-btn" class="absolute -top-3 -right-3 bg-white rounded-full p-2 shadow-lg text-gray-700 hover:bg-red-500 hover:text-white transition-colors duration-200 z-10">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+          </button>
+          <div class="p-0">
+              <img id="modal-img" src="" alt="Imagen del producto" class="w-full h-64 object-cover rounded-t-2xl">
+              <div class="p-6">
+                  <h2 id="modal-name" class="text-3xl font-bold text-gray-900 mb-2"></h2>
+                  <p id="modal-price" class="text-2xl font-semibold text-emerald-600 mb-4"></p>
+                  <div class="flex items-center justify-center space-x-6 my-6">
+                      <button id="modal-quantity-decrease" class="w-10 h-10 bg-gray-200 text-gray-700 rounded-full font-bold text-2xl flex items-center justify-center hover:bg-gray-300 transition disabled:opacity-50">-</button>
+                      <span id="modal-quantity-value" class="text-3xl font-bold text-gray-800">1</span>
+                      <button id="modal-quantity-increase" class="w-10 h-10 bg-gray-200 text-gray-700 rounded-full font-bold text-2xl flex items-center justify-center hover:bg-gray-300 transition">+</button>
+                  </div>
+                  <button id="add-to-cart-btn" class="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300">Añadir al Carrito</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div id="cart-overlay" class="fixed inset-0 bg-black bg-opacity-60 z-40 hidden"></div>
+  <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+    <div class="flex justify-between items-center p-4 border-b">
+      <h2 class="text-2xl font-bold text-gray-800">Mi Carrito</h2>
+      <button id="close-cart-btn" class="text-gray-600 hover:text-red-500 transition"><i class="fas fa-times text-2xl"></i></button>
+    </div>
+    <div id="cart-items-container" class="flex-grow p-4 overflow-y-auto">
+      <p class="text-gray-500">Tu carrito está vacío.</p>
+    </div>
+    <div id="cart-footer" class="p-4 border-t hidden">
+      <div class="flex justify-between items-center mb-4">
+        <span class="text-xl font-bold text-gray-800">Total:</span>
+        <span id="cart-total" class="text-xl font-bold text-emerald-600"></span>
+      </div>
+      <!-- BOTÓN BORRAR TODO AGREGADO -->
+      <div class="flex justify-between mb-4">
+        <button id="clear-cart-btn" class="bg-gray-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-600 transition flex items-center">
+          <i class="fas fa-trash mr-2"></i> Borrar Todo
+        </button>
+        <button id="checkout-btn" class="bg-green-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-green-700 transition">
+          Finalizar Compra
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ** FUNCIÓN DE CALLBACK PARA GOOGLE SIGN-IN **
+    // Esta función es llamada automáticamente por la librería de Google después de la autenticación.
+    function handleCredentialResponse(response) {
+      // response.credential contiene el ID token (JWT)
+      console.log("ID Token: " + response.credential);
+
+      // Aquí es donde DEBERÍAS enviar el token al servidor (backend) para verificarlo
+      // y crear o recuperar la sesión del usuario de forma segura.
+      alert("Inicio de sesión con Google exitoso! Revisa la consola para ver el token.");
+
+      // Lógica para cerrar la sección de login y volver al inicio
+      document.getElementById('login').classList.add('hidden');
+      document.getElementById('inicio').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      let cart = [];
+      let currentRecipe = {};
+
+      // AÑADIDO: Se incluye el nuevo enlace de login en los navLinks
+      const sections = document.querySelectorAll('.section');
+      const navLinks = document.querySelectorAll('nav a, #login-nav-btn'); 
+      const carouselImages = document.querySelectorAll('.carousel-img');
+      const recipeModal = document.getElementById('modal');
+      const recipeModalContent = document.getElementById('modal-content');
+      const recipeModalCloseBtn = document.getElementById('modal-close-btn');
+      const recipeModalImg = document.getElementById('modal-img');
+      const recipeModalName = document.getElementById('modal-name');
+      const recipeModalPrice = document.getElementById('modal-price');
+      const recipeQuantityDecreaseBtn = document.getElementById('modal-quantity-decrease');
+      const recipeQuantityIncreaseBtn = document.getElementById('modal-quantity-increase');
+      const recipeQuantityValueSpan = document.getElementById('modal-quantity-value');
+      const addToCartBtn = document.getElementById('add-to-cart-btn');
+      const recipeCards = document.querySelectorAll('.recipe-card');
+      const toggleKitsBtn = document.getElementById('toggle-kits-btn');
+      const kitsList = document.getElementById('kits-list');
+      const togglePremiumBtn = document.getElementById('toggle-premium-btn');
+      const premiumPlans = document.getElementById('premium-plans');
+      const cartBtn = document.getElementById('cart-btn');
+      const cartBadge = document.getElementById('cart-badge');
+      const cartSidebar = document.getElementById('cart-sidebar');
+      const cartOverlay = document.getElementById('cart-overlay');
+      const closeCartBtn = document.getElementById('close-cart-btn');
+      const cartItemsContainer = document.getElementById('cart-items-container');
+      const cartFooter = document.getElementById('cart-footer');
+      const cartTotal = document.getElementById('cart-total');
+      const realidadVirtualBtn = document.getElementById('realidad-virtual-btn');
+      const conocenosBtn = document.getElementById('conocenos-btn');
+      const realidadVirtualSection = document.getElementById('realidad-virtual');
+      const conocenosSection = document.getElementById('conocenos');
+      const kitDetailBtns = document.querySelectorAll('.kit-detail-btn');
+      const kitDetailSections = document.querySelectorAll('.kit-detail');
+      const backToKitsBtns = document.querySelectorAll('.back-to-kits');
+      
+      // NUEVOS ELEMENTOS AGREGADOS
+      const clearCartBtn = document.getElementById('clear-cart-btn');
+      const checkoutBtn = document.getElementById('checkout-btn');
+      const paymentMethodBtns = document.querySelectorAll('.payment-method-btn');
+      const backToHomeBtn = document.getElementById('back-to-home-btn');
+
+      const formatCLP = (value) => new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(value);
+
+      const openCart = () => {
+        cartOverlay.classList.remove('hidden');
+        cartSidebar.classList.remove('translate-x-full');
+      };
+
+      const closeCart = () => {
+        cartSidebar.classList.add('translate-x-full');
+        cartOverlay.classList.add('hidden');
+      };
+
+      const updateCart = () => {
+        cartItemsContainer.innerHTML = '';
+        if (cart.length === 0) {
+          cartItemsContainer.innerHTML = '<p class="text-gray-500">Tu carrito está vacío.</p>';
+          cartFooter.classList.add('hidden');
+          cartBadge.classList.add('hidden');
+          return;
+        }
+        let total = 0;
+        let totalItems = 0;
+        cart.forEach(item => {
+          const itemSubtotal = item.price * item.quantity;
+          total += itemSubtotal;
+          totalItems += item.quantity;
+          const cartItemHTML = `
+            <div class="flex items-center justify-between mb-4 bg-gray-50 p-3 rounded-lg">
+              <div class="flex items-center">
+                <img src="${item.imgSrc}" alt="${item.name}" class="w-16 h-16 object-cover rounded-md mr-4">
+                <div>
+                  <h4 class="font-bold text-gray-800">${item.name}</h4>
+                  <p class="text-sm text-gray-600">${formatCLP(item.price)}</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="flex items-center border rounded-full">
+                  <button class="cart-quantity-btn w-8 h-8 text-gray-600" data-id="${item.id}" data-action="decrease">-</button>
+                  <span class="font-bold text-gray-800">${item.quantity}</span>
+                  <button class="cart-quantity-btn w-8 h-8 text-gray-600" data-id="${item.id}" data-action="increase">+</button>
+                </div>
+                <p class="font-semibold w-24 text-right">${formatCLP(itemSubtotal)}</p>
+              </div>
+            </div>
+          `;
+          cartItemsContainer.innerHTML += cartItemHTML;
+        });
+        cartTotal.textContent = formatCLP(total);
+        cartFooter.classList.remove('hidden');
+        cartBadge.textContent = totalItems;
+        cartBadge.classList.remove('hidden');
+      };
+      
+      const addItemToCart = (item) => {
+        const existingItem = cart.find(cartItem => cartItem.id === item.id);
+        if (existingItem) {
+          existingItem.quantity += item.quantity;
+        } else {
+          cart.push(item);
+        }
+        updateCart();
+      };
+
+      const handleCartQuantityChange = (itemId, action) => {
+        const itemIndex = cart.findIndex(item => item.id === itemId);
+        if (itemIndex === -1) return;
+        if (action === 'increase') {
+          cart[itemIndex].quantity++;
+        } else if (action === 'decrease') {
+          cart[itemIndex].quantity--;
+        }
+        if (cart[itemIndex].quantity <= 0) {
+          cart.splice(itemIndex, 1);
+        }
+        updateCart();
+      };
+
+      const updateRecipeModalDisplay = () => {
+        recipeQuantityValueSpan.textContent = currentRecipe.quantity;
+        const totalPrice = currentRecipe.basePrice * currentRecipe.quantity;
+        recipeModalPrice.textContent = formatCLP(totalPrice);
+        recipeQuantityDecreaseBtn.disabled = currentRecipe.quantity === 1;
+      };
+
+      const openRecipeModal = (card) => {
+          currentRecipe = {
+            id: card.dataset.id,
+            name: card.dataset.name,
+            basePrice: parseFloat(card.dataset.priceValue),
+            imgSrc: card.dataset.imgSrc,
+            quantity: 1
+          };
+          recipeModalImg.src = currentRecipe.imgSrc;
+          recipeModalName.textContent = currentRecipe.name;
+          updateRecipeModalDisplay();
+          recipeModal.classList.remove('pointer-events-none', 'opacity-0');
+          recipeModalContent.classList.remove('scale-95');
+      };
+
+      const closeRecipeModal = () => {
+          recipeModal.classList.add('opacity-0');
+          recipeModalContent.classList.add('scale-95');
+          setTimeout(() => recipeModal.classList.add('pointer-events-none'), 300);
+      };
+
+      // Función para restablecer el estado de todas las secciones colapsables/ocultables dentro de las secciones principales
+      const resetCollapsibleSections = () => {
+          // Cerrar Realidad Virtual y Conócenos
+          realidadVirtualSection.classList.remove('active');
+          conocenosSection.classList.remove('active');
+
+          // Cerrar la lista de Kits
+          kitsList.classList.add('hidden');
+          toggleKitsBtn.textContent = `Ver ${toggleKitsBtn.dataset.text}`;
+          
+          // Cerrar la lista de Planes Premium
+          premiumPlans.classList.add('hidden');
+          togglePremiumBtn.textContent = `Ver ${togglePremiumBtn.dataset.text}`;
+
+          // Ocultar cualquier detalle de kit abierto
+          hideKitDetails();
+      };
+
+      const showKitDetail = (kitId) => {
+        kitDetailSections.forEach(section => section.classList.remove('active')); // Ocultar todos los detalles de kits
+        kitsList.classList.add('hidden');
+        document.getElementById(`kit-${kitId}`).classList.add('active');
+        setTimeout(() => document.getElementById(`kit-${kitId}`).scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+      };
+
+      const hideKitDetails = () => {
+        kitDetailSections.forEach(section => section.classList.remove('active'));
+        kitsList.classList.remove('hidden');
+        // Solo desplazarse si la sección de kits está visible
+        if (!document.getElementById('kits').classList.contains('hidden')) {
+          setTimeout(() => document.getElementById('kits').scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+        }
+      };
+
+      // Función para vaciar el carrito completamente
+      const clearCart = () => {
+        cart = [];
+        updateCart();
+        closeCart();
+      };
+
+      // Función para procesar el pago y mostrar la sección de finalizar compra
+      const processCheckout = () => {
+        if (cart.length === 0) {
+          alert('Tu carrito está vacío. Agrega productos antes de finalizar la compra.');
+          return;
+        }
+        
+        // Cerrar el carrito
+        closeCart();
+        
+        // Ocultar todas las secciones
+        sections.forEach(s => s.classList.add('hidden'));
+        
+        // Mostrar la sección de finalizar compra
+        document.getElementById('finalizar-compra').classList.remove('hidden');
+        
+        // Desplazarse a la parte superior
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      // Función para volver al inicio desde la sección de finalizar compra
+      const backToHome = () => {
+        // Ocultar la sección de finalizar compra
+        document.getElementById('finalizar-compra').classList.add('hidden');
+        
+        // Mostrar la sección de inicio
+        document.getElementById('inicio').classList.remove('hidden');
+        
+        // Desplazarse a la parte superior
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      // Event Listeners
+      navLinks.forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const targetId = link.dataset.section;
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            
+            // 1. Resetear el estado de los contenidos colapsables ANTES de cambiar de sección
+            resetCollapsibleSections(); 
+
+            // 2. Ocultar TODAS las secciones principales (inicio, recetas, kits, premium, login)
+            sections.forEach(s => s.classList.add('hidden')); 
+            
+            // 3. Mostrar SOLO la sección de destino
+            targetElement.classList.remove('hidden');
+            
+            // 4. Mover la vista a la parte superior de la nueva sección
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        });
+      });
+
+      let currentImageIndex = 0;
+      if (carouselImages.length > 0) {
+        setInterval(() => {
+          carouselImages[currentImageIndex].classList.remove('active');
+          currentImageIndex = (currentImageIndex + 1) % carouselImages.length;
+          carouselImages[currentImageIndex].classList.add('active');
+        }, 5000);
+      }
+
+      recipeCards.forEach(card => card.addEventListener('click', () => openRecipeModal(card)));
+      recipeModalCloseBtn.addEventListener('click', closeRecipeModal);
+      recipeModal.addEventListener('click', e => e.target === recipeModal && closeRecipeModal());
+      recipeQuantityIncreaseBtn.addEventListener('click', () => {
+        currentRecipe.quantity++;
+        updateRecipeModalDisplay();
+      });
+      recipeQuantityDecreaseBtn.addEventListener('click', () => {
+        if (currentRecipe.quantity > 1) {
+          currentRecipe.quantity--;
+          updateRecipeModalDisplay();
+        }
+      });
+      addToCartBtn.addEventListener('click', () => {
+        addItemToCart({
+          id: currentRecipe.id,
+          name: currentRecipe.name,
+          price: currentRecipe.basePrice,
+          quantity: currentRecipe.quantity,
+          imgSrc: currentRecipe.imgSrc
+        });
+        closeRecipeModal();
+      });
+
+      cartBtn.addEventListener('click', openCart);
+      closeCartBtn.addEventListener('click', closeCart);
+      cartOverlay.addEventListener('click', closeCart);
+      cartItemsContainer.addEventListener('click', (e) => {
+        if (e.target.matches('.cart-quantity-btn')) {
+          const id = e.target.dataset.id;
+          const action = e.target.dataset.action;
+          handleCartQuantityChange(id, action);
+        }
+      });
+
+      // NUEVOS EVENT LISTENERS AGREGADOS
+      clearCartBtn.addEventListener('click', clearCart);
+      checkoutBtn.addEventListener('click', processCheckout);
+      backToHomeBtn.addEventListener('click', backToHome);
+      
+      // Event listeners para métodos de pago
+      paymentMethodBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Remover la clase activa de todos los botones
+          paymentMethodBtns.forEach(b => {
+            b.classList.remove('border-green-500', 'border-blue-500', 'bg-green-50', 'bg-blue-50');
+            b.classList.add('border-gray-200');
+          });
+          
+          // Aplicar estilos al botón seleccionado
+          const method = btn.dataset.method;
+          if (method === 'efectivo') {
+            btn.classList.add('border-green-500', 'bg-green-50');
+          } else if (method === 'tarjeta') {
+            btn.classList.add('border-blue-500', 'bg-blue-50');
+          }
+          
+          // Aquí podrías agregar lógica adicional según el método de pago seleccionado
+          console.log(`Método de pago seleccionado: ${method}`);
+        });
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          if (!recipeModal.classList.contains('pointer-events-none')) closeRecipeModal();
+          if (!cartSidebar.classList.contains('translate-x-full')) closeCart();
+        }
+      });
+
+      toggleKitsBtn.dataset.text = "Kits Disponibles";
+      togglePremiumBtn.dataset.text = "Planes";
+      [toggleKitsBtn, togglePremiumBtn].forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const content = btn === toggleKitsBtn ? kitsList : premiumPlans;
+          const isHidden = content.classList.contains('hidden');
+          content.classList.toggle('hidden');
+          btn.textContent = isHidden ? `Ocultar ${btn.dataset.text}` : `Ver ${btn.dataset.text}`;
+          if (isHidden) {
+            setTimeout(() => content.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+          }
+        });
+      });
+      
+      // Lógica mejorada para botones de Realidad Virtual y Conócenos para que solo uno se abra a la vez
+      realidadVirtualBtn.addEventListener('click', () => {
+          const targetSection = document.getElementById('realidad-virtual');
+          const otherSection = document.getElementById('conocenos');
+          const isCurrentlyActive = targetSection.classList.contains('active');
+          
+          otherSection.classList.remove('active'); // Cerrar la otra sección
+          targetSection.classList.toggle('active', !isCurrentlyActive); // Abrir si está cerrada
+          
+          if (!isCurrentlyActive) {
+               setTimeout(() => targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+          }
+      });
+      
+      conocenosBtn.addEventListener('click', () => {
+          const targetSection = document.getElementById('conocenos');
+          const otherSection = document.getElementById('realidad-virtual');
+          const isCurrentlyActive = targetSection.classList.contains('active');
+          
+          otherSection.classList.remove('active'); // Cerrar la otra sección
+          targetSection.classList.toggle('active', !isCurrentlyActive); // Abrir si está cerrada
+          
+          if (!isCurrentlyActive) {
+               setTimeout(() => targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+          }
+      });
+
+      kitDetailBtns.forEach(btn => {
+        btn.addEventListener('click', () => showKitDetail(btn.dataset.kit));
+      });
+      backToKitsBtns.forEach(btn => {
+        btn.addEventListener('click', hideKitDetails);
+      });
+
+      updateCart();
+    });
+  </script>
+</body>
+</html>
